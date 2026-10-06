@@ -1,0 +1,21 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8"><meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Recipes - RecipeHub</title><link rel="stylesheet" href="css/style.css">
+</head>
+<body>
+<header class="navbar"><a class="logo" href="user-dashboard.html">🍴 RecipeHub</a><nav><a href="user-dashboard.html">Dashboard</a><a href="favorites.html">Favorites</a><a href="collections.html">Collections</a><a href="submit-recipe.html">Submit</a><button class="link-btn" onclick="logout()">Logout</button></nav></header>
+<main class="container">
+<div class="page-title"><span class="eyebrow">RECIPE LIBRARY</span><h1>Discover Recipes</h1><p>Search by recipe, ingredient, cuisine or dietary preference.</p></div>
+<div class="filters card">
+<input id="searchInput" placeholder="Search recipe or ingredient...">
+<select id="cuisineFilter"><option value="">All cuisines</option><option>Indian</option><option>Italian</option><option>Chinese</option><option>Mexican</option></select>
+<select id="dietFilter"><option value="">All dietary types</option><option>Vegetarian</option><option>Non-Vegetarian</option><option>Vegan</option><option>Gluten-Free</option></select>
+<button class="btn" onclick="renderRecipes()">Search</button>
+</div>
+<div id="recipeGrid" class="recipe-grid"></div>
+</main>
+<script src="js/auth.js"></script><script src="js/recipes.js"></script>
+<script>protectPage("user"); renderRecipes();</script>
+</body></html>

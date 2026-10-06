@@ -1,0 +1,16 @@
+<!DOCTYPE html>
+<html lang="en">
+<head><meta charset="UTF-8"><meta name="viewport" content="width=device-width, initial-scale=1.0"><title>Submit Recipe - RecipeHub</title><link rel="stylesheet" href="css/style.css"></head>
+<body>
+<header class="navbar"><a class="logo" href="user-dashboard.html">🍴 RecipeHub</a><nav><a href="recipes.html">Recipes</a><a href="favorites.html">Favorites</a><a href="collections.html">Collections</a><button class="link-btn" onclick="logout()">Logout</button></nav></header>
+<main class="container narrow"><div class="page-title"><span class="eyebrow">COMMUNITY</span><h1>Submit a Recipe</h1><p>Your recipe will be reviewed by an administrator.</p></div>
+<form id="submitForm" class="card form-card">
+<label>Recipe Name<input id="rName" required></label>
+<div class="two-col"><label>Cuisine<select id="rCuisine"><option>Indian</option><option>Italian</option><option>Chinese</option><option>Mexican</option></select></label><label>Dietary Preference<select id="rDiet"><option>Vegetarian</option><option>Non-Vegetarian</option><option>Vegan</option><option>Gluten-Free</option></select></label></div>
+<label>Ingredients <small>Separate with commas</small><textarea id="rIngredients" required placeholder="Tomato, Onion, Pasta"></textarea></label>
+<label>Preparation Steps <small>Put each step on a new line</small><textarea id="rSteps" required placeholder="Boil the pasta&#10;Prepare the sauce&#10;Mix and serve"></textarea></label>
+<button class="btn" type="submit">Submit for Review</button>
+<div id="message" class="message"></div>
+</form></main>
+<script src="js/auth.js"></script><script src="js/user.js"></script><script>protectPage("user"); document.getElementById("submitForm").addEventListener("submit", submitRecipe);</script>
+</body></html>

@@ -1,0 +1,145 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>Manage Recipes</title>
+<link rel="stylesheet" href="css/style.css">
+</head>
+<body>
+<header class="navbar">
+<h2>RecipeHub Admin</h2>
+<nav>
+<a href="admin-dashboard.html">Dashboard</a>
+<a href="manage-recipes.html">Manage Recipes</a>
+<a href="manage-users.html">Users</a>
+<a href="submissions.html">Submissions</a>
+<a href="#" id="logout">Logout</a>
+</nav>
+</header>
+
+<main class="container">
+<div class="page-header">
+<div><h1>Manage Recipes</h1><p>Admin recipes are published to the User Recipes page.</p></div>
+<button class="btn" id="addBtn">+ Add Recipe</button>
+</div>
+
+<form id="recipeForm" class="card" style="display:none">
+<h2 id="formTitle">Add Recipe</h2>
+<input type="hidden" id="rid">
+<label>Recipe Name<input id="name" required></label>
+<label>Cuisine<input id="cuisine" required></label>
+<label>Dietary Preference
+<select id="diet"><option>Vegetarian</option><option>Non-Vegetarian</option><option>Vegan</option></select>
+</label>
+<label>Ingredients<textarea id="ingredients" required placeholder="One ingredient per line"></textarea></label>
+<label>Instructions<textarea id="instructions" required placeholder="One step per line"></textarea></label>
+<label>Image URL (optional)<input id="image"></label>
+<br>
+<button class="btn" type="submit">Save Recipe</button>
+<button class="btn secondary" type="button" id="cancel">Cancel</button>
+<p id="msg"></p>
+</form>
+
+<section id="list" class="recipe-grid"></section>
+<p id="empty" class="card">No recipes yet.</p>
+</main>
+
+<script>
+const currentUser=JSON.parse(localStorage.getItem("recipehub_current")||"null");
+if(!currentUser || currentUser.role!=="admin") location.href="login.html";
+
+const $=id=>document.getElementById(id);
+const getRecipes=()=>JSON.parse(localStorage.getItem("recipes")||"[]");
+const saveRecipes=r=>localStorage.setItem("recipes",JSON.stringify(r));
+
+function esc(x){
+ return String(x??"").replace(/[&<>"']/g,c=>({"&":"&amp;","<":"&lt;",">":"&gt;",'"':"&quot;","'":"&#039;"}[c]));
+}
+
+function render(){
+ const recipes=getRecipes();
+ $("list").innerHTML="";
+ $("empty").style.display=recipes.length?"none":"block";
+ recipes.forEach(r=>{
+  const card=document.createElement("article");
+  card.className="card";
+  card.innerHTML=
+   '<h3>'+esc(r.name)+'</h3>'+
+   '<p><b>Cuisine:</b> '+esc(r.cuisine)+'</p>'+
+   '<p><b>Diet:</b> '+esc(r.diet)+'</p>'+
+   '<p><b>Published:</b> Yes</p>'+
+   '<button class="btn edit" data-id="'+esc(r.id)+'">Edit</button> '+
+   '<button class="btn danger del" data-id="'+esc(r.id)+'">Delete</button>';
+  $("list").appendChild(card);
+ });
+}
+
+$("addBtn").onclick=()=>{
+ $("recipeForm").reset();
+ $("rid").value="";
+ $("formTitle").textContent="Add Recipe";
+ $("recipeForm").style.display="block";
+};
+
+$("cancel").onclick=()=>$("recipeForm").style.display="none";
+
+$("recipeForm").onsubmit=e=>{
+ e.preventDefault();
+ const recipes=getRecipes();
+ const id=$("rid").value||"recipe-"+Date.now();
+ const recipe={
+  id:id,
+  name:$("name").value.trim(),
+  cuisine:$("cuisine").value.trim(),
+  diet:$("diet").value,
+  ingredients:$("ingredients").value.split("\n").map(x=>x.trim()).filter(Boolean),
+  instructions:$("instructions").value.split("\n").map(x=>x.trim()).filter(Boolean),
+  image:$("image").value.trim(),
+  rating:0,
+  ratingsCount:0,
+  published:true,
+  createdBy:currentUser.email,
+  createdAt:new Date().toISOString()
+ };
+ const i=recipes.findIndex(x=>x.id===id);
+ if(i>=0) recipes[i]=recipe; else recipes.push(recipe);
+ saveRecipes(recipes);
+ $("recipeForm").style.display="none";
+ $("msg").textContent="Recipe saved successfully!";
+ render();
+};
+
+$("list").onclick=e=>{
+ const id=e.target.dataset.id;
+ if(!id)return;
+ let recipes=getRecipes();
+ const r=recipes.find(x=>x.id===id);
+ if(e.target.classList.contains("del")){
+  if(confirm("Delete this recipe?")){
+   saveRecipes(recipes.filter(x=>x.id!==id)); render();
+  }
+ }
+ if(e.target.classList.contains("edit")){
+  $("rid").value=r.id;
+  $("name").value=r.name||"";
+  $("cuisine").value=r.cuisine||"";
+  $("diet").value=r.diet||"Vegetarian";
+  $("ingredients").value=Array.isArray(r.ingredients)?r.ingredients.join("\n"):(r.ingredients||"");
+  $("instructions").value=Array.isArray(r.instructions)?r.instructions.join("\n"):(r.instructions||"");
+  $("image").value=r.image||"";
+  $("formTitle").textContent="Edit Recipe";
+  $("recipeForm").style.display="block";
+ }
+};
+
+$("logout").onclick=e=>{
+ e.preventDefault();
+ localStorage.removeItem("recipehub_current");
+ location.href="login.html";
+};
+
+render();
+</script>
+</body>
+</html>

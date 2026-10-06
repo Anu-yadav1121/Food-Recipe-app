@@ -1,0 +1,29 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Sign Up - RecipeHub</title>
+<link rel="stylesheet" href="css/style.css">
+</head>
+<body class="auth-page">
+<div class="auth-card">
+  <a class="logo center" href="index.html">🍴 RecipeHub</a>
+  <h1>Create your account</h1>
+  <p class="muted">Join RecipeHub and start building your recipe collection.</p>
+  <div id="message" class="message"></div>
+  <form id="signupForm">
+    <label>Full Name<input type="text" id="name" required placeholder="Enter your name"></label>
+    <label>Email<input type="email" id="email" required placeholder="Enter your email"></label>
+    <label>Password<input type="password" id="password" minlength="6" required placeholder="Minimum 6 characters"></label>
+    <label>Confirm Password<input type="password" id="confirmPassword" required placeholder="Re-enter password"></label>
+    <button class="btn full" type="submit">Create Account</button>
+  </form>
+  <p class="auth-link">Already have an account? <a href="login.html">Login</a></p>
+</div>
+<script src="js/auth.js"></script>
+<script>
+document.getElementById("signupForm").addEventListener("submit", signupUser);
+</script>
+</body>
+</html>

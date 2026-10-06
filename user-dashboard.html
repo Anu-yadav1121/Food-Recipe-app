@@ -1,0 +1,27 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8"><meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>User Dashboard - RecipeHub</title><link rel="stylesheet" href="css/style.css">
+</head>
+<body>
+<header class="navbar"><a class="logo" href="user-dashboard.html">🍴 RecipeHub</a><nav><a href="recipes.html">Recipes</a><a href="favorites.html">Favorites</a><a href="collections.html">Collections</a><a href="submit-recipe.html">Submit</a><button class="link-btn" onclick="logout()">Logout</button></nav></header>
+<main class="container">
+<section class="dashboard-hero"><div><span class="eyebrow">USER MODULE</span><h1>Welcome, <span id="userName">Chef</span>! 👋</h1><p>Discover recipes, save favorites and share your own creations.</p></div><a class="btn" href="recipes.html">Browse Recipes</a></section>
+<div class="stats-grid">
+<a class="stat-link stat card" href="recipes.html"><span>📖</span><strong id="recipeCount">0</strong><small>Available Recipes</small></a>
+<a class="stat-link stat card" href="favorites.html"><span>❤️</span><strong id="favCount">0</strong><small>Favorites</small></a>
+<a class="stat-link stat card" href="collections.html"><span>📁</span><strong id="collectionCount">0</strong><small>Collections</small></a>
+<a class="stat-link stat card" href="submit-recipe.html"><span>📝</span><strong id="submissionCount">0</strong><small>My Submissions</small></a>
+</div>
+<div class="section-heading"><span class="eyebrow">QUICK ACTIONS</span><h2>What would you like to do?</h2></div>
+<div class="feature-grid">
+<a class="card action-card" href="recipes.html"><div class="icon">🔎</div><h3>Explore Recipes</h3><p>Search and filter recipes.</p></a>
+<a class="card action-card" href="favorites.html"><div class="icon">❤️</div><h3>My Favorites</h3><p>See recipes you saved.</p></a>
+<a class="card action-card" href="collections.html"><div class="icon">📁</div><h3>My Collections</h3><p>Organize your cooking ideas.</p></a>
+<a class="card action-card" href="submit-recipe.html"><div class="icon">➕</div><h3>Submit Recipe</h3><p>Share your own recipe.</p></a>
+</div>
+</main>
+<script src="js/auth.js"></script><script src="js/recipes.js"></script><script src="js/user.js"></script>
+<script>protectPage("user"); loadUserDashboard();</script>
+</body></html>

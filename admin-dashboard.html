@@ -1,0 +1,22 @@
+<!DOCTYPE html>
+<html lang="en">
+<head><meta charset="UTF-8"><meta name="viewport" content="width=device-width, initial-scale=1.0"><title>Admin Dashboard - RecipeHub</title><link rel="stylesheet" href="css/style.css"></head>
+<body>
+<header class="navbar admin-nav"><a class="logo" href="admin-dashboard.html">🛠️ RecipeHub Admin</a><nav><a href="manage-recipes.html">Recipes</a><a href="manage-users.html">Users</a><a href="submissions.html">Submissions</a><button class="link-btn" onclick="logout()">Logout</button></nav></header>
+<main class="container">
+<section class="dashboard-hero"><div><span class="eyebrow">ADMIN MODULE</span><h1>Administration Dashboard</h1><p>Manage recipes, users and community submissions.</p></div></section>
+<div class="stats-grid">
+<a class="stat card stat-link" href="manage-users.html"><span>👥</span><strong id="adminUsers">0</strong><small>Total Users</small></a>
+<a class="stat card stat-link" href="manage-recipes.html"><span>📖</span><strong id="adminRecipes">0</strong><small>Recipes</small></a>
+<a class="stat card stat-link" href="submissions.html"><span>⏳</span><strong id="adminPending">0</strong><small>Pending Submissions</small></a>
+<a class="stat card stat-link" href="ratings.html"><span>⭐</span><strong id="adminRatings">0</strong><small>Total Ratings</small></a>
+</div>
+<div class="section-heading"><span class="eyebrow">MANAGEMENT</span><h2>Choose an area</h2></div>
+<div class="feature-grid">
+<a class="card action-card" href="manage-recipes.html"><div class="icon">📖</div><h3>Manage Recipes</h3><p>Add, edit and delete recipes.</p></a>
+<a class="card action-card" href="manage-users.html"><div class="icon">👥</div><h3>Manage Users</h3><p>View registered users.</p></a>
+<a class="card action-card" href="submissions.html"><div class="icon">📝</div><h3>Submissions</h3><p>Approve or reject user recipes.</p></a>
+</div>
+</main>
+<script src="js/auth.js"></script><script src="js/recipes.js"></script><script src="js/admin.js"></script><script>protectPage("admin"); loadAdminDashboard();</script>
+</body></html>

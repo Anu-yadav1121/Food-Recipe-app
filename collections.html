@@ -1,0 +1,10 @@
+<!DOCTYPE html>
+<html lang="en">
+<head><meta charset="UTF-8"><meta name="viewport" content="width=device-width, initial-scale=1.0"><title>Collections - RecipeHub</title><link rel="stylesheet" href="css/style.css"></head>
+<body>
+<header class="navbar"><a class="logo" href="user-dashboard.html">🍴 RecipeHub</a><nav><a href="recipes.html">Recipes</a><a href="favorites.html">Favorites</a><a href="submit-recipe.html">Submit</a><button class="link-btn" onclick="logout()">Logout</button></nav></header>
+<main class="container"><div class="page-title"><span class="eyebrow">PERSONALIZED</span><h1>📁 My Collections</h1><p>Create collections and add saved recipes.</p></div>
+<div class="card collection-create"><input id="collectionName" placeholder="New collection name"><button class="btn" onclick="createCollection()">Create Collection</button></div>
+<div id="collectionList" class="collection-grid"></div></main>
+<script src="js/auth.js"></script><script src="js/user.js"></script><script>protectPage("user"); renderCollections();</script>
+</body></html>

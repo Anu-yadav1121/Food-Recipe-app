@@ -1,0 +1,8 @@
+<!DOCTYPE html>
+<html lang="en">
+<head><meta charset="UTF-8"><meta name="viewport" content="width=device-width, initial-scale=1.0"><title>Submissions - RecipeHub</title><link rel="stylesheet" href="css/style.css"></head>
+<body>
+<header class="navbar admin-nav"><a class="logo" href="admin-dashboard.html">🛠️ RecipeHub Admin</a><nav><a href="admin-dashboard.html">Dashboard</a><a href="manage-recipes.html">Recipes</a><a href="manage-users.html">Users</a><button class="link-btn" onclick="logout()">Logout</button></nav></header>
+<main class="container"><div class="page-title"><span class="eyebrow">ADMIN</span><h1>Recipe Submissions</h1><p>Review recipes submitted by users.</p></div><div id="submissionList" class="admin-list"></div></main>
+<script src="js/auth.js"></script><script src="js/admin.js"></script><script>protectPage("admin"); renderSubmissions();</script>
+</body></html>

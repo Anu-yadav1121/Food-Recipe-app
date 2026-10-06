@@ -1,0 +1,30 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8"><meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Ratings - RecipeHub</title><link rel="stylesheet" href="css/style.css">
+</head>
+<body>
+<header class="navbar admin-nav"><a class="logo" href="admin-dashboard.html">🛠️ RecipeHub Admin</a><nav><a href="admin-dashboard.html">Dashboard</a><a href="manage-recipes.html">Recipes</a><a href="manage-users.html">Users</a><a href="submissions.html">Submissions</a><button class="link-btn" onclick="logout()">Logout</button></nav></header>
+<main class="container">
+<div class="page-title"><span class="eyebrow">ADMIN</span><h1>Recipe Ratings</h1><p>View ratings submitted by users.</p></div>
+<div id="ratingsList" class="admin-list"></div>
+</main>
+<script src="js/auth.js"></script><script src="js/recipes.js"></script>
+<script>
+protectPage("admin");
+const ratings=getRatings();
+const recipes=getRecipes();
+const list=document.getElementById("ratingsList");
+const rows=[];
+Object.entries(ratings).forEach(([recipeId,userRatings])=>{
+ const recipe=recipes.find(r=>String(r.id)===String(recipeId));
+ Object.entries(userRatings||{}).forEach(([userId,value])=>{
+   const users=getUsers();
+   const user=users.find(u=>String(u.id)===String(userId));
+   rows.push({recipe:recipe?recipe.name:"Unknown Recipe",user:user?user.name:"Unknown User",rating:value});
+ });
+});
+list.innerHTML=rows.length?rows.map(x=>`<div class="admin-item"><div><h3>⭐ ${x.recipe}</h3><p>Rated by ${x.user}</p></div><strong class="rating">${x.rating}/5</strong></div>`).join(""):`<div class="empty">No ratings have been submitted yet.</div>`;
+</script>
+</body></html>
